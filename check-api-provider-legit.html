@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Check If Your API Provider Is Legitimate — 2026 Guide</title>
+    <meta name="description" content="Step-by-step guide to verify API providers are not running fake models or inflating tokens.">
+    <link rel="canonical" href="https://tehdarklea.github.io/check-api-provider-legit.html">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 720px; margin: 0 auto; padding: 40px 20px; color: #1a1a1a; line-height: 1.7; }
+        h1 { font-size: 2em; margin-bottom: 0.5em; }
+        h2 { font-size: 1.5em; margin-top: 1.5em; }
+        h3 { font-size: 1.2em; margin-top: 1.2em; }
+        a { color: #0066cc; }
+        code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; }
+        ul, ol { padding-left: 1.5em; }
+        .cta { background: #f0f7ff; border: 1px solid #c8e1ff; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center; }
+        .cta a { font-size: 1.1em; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Is Your API Provider Legitimate?</h1>
+    <h2>Why This Matters</h2>
+<p>When you pay for API access, you trust the provider to deliver what they promise. But the API relay market is full of providers who cut corners — substituting models, inflating tokens, and hiding proxy chains.</p>
+
+<h2>5 Red Flags of Fraudulent API Providers</h2>
+
+<h3>🚩 1. Prices Too Good to Be True</h3>
+<p>If GPT-4 access costs 50% less than OpenAI's official pricing, something is wrong. The provider is likely downgrading your model.</p>
+
+<h3>🚩 2. No Rate Limits</h3>
+<p>Legitimate providers enforce rate limits. No limits often means your requests are being batched and processed through cheaper models.</p>
+
+<h3>🚩 3. Missing Response Headers</h3>
+<p>Official API responses include specific headers. If headers are missing or modified, you're going through a proxy.</p>
+
+<h3>🚩 4. Unusual Latency Patterns</h3>
+<p>If simple requests take 2-3 seconds but complex ones are just as fast, the provider might be caching or downgrading.</p>
+
+<h3>🚩 5. Token Count Mismatches</h3>
+<p>If reported token counts seem higher than expected for short responses, you're being overcharged.</p>
+
+<h2>Quick Verification Method</h2>
+<p>Use <a href="https://api-dna.com">API DNA</a> to instantly verify any API endpoint:</p>
+<ul>
+<li>Free, no signup required</li>
+<li>Supports 80+ LLM models</li>
+<li>Detects model substitution, token inflation, and relay chains</li>
+<li>Provides integrity score (A-F)</li>
+</ul>
+
+<h2>Manual Verification Steps</h2>
+<ol>
+<li>Compare response quality with official API for identical prompts</li>
+<li>Verify token counts match expected values using the official tokenizer</li>
+<li>Check TLS certificate — should match the official provider</li>
+<li>Measure baseline latency and compare with official endpoint</li>
+<li>Run a full scan on <a href="https://api-dna.com">API DNA</a></li>
+</ol>
+    <div class="cta">
+        <p>🔍 Verify your API provider for free → <a href="https://api-dna.com">API DNA</a></p>
+    </div>
+    <footer style="margin-top:40px;padding-top:20px;border-top:1px solid #eee;font-size:0.9em;color:#666">
+        <p>Free API fingerprint verification: <a href="https://api-dna.com">api-dna.com</a></p>
+    </footer>
+</body>
+</html>
