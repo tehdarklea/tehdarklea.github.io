@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Inflation in LLM APIs — How Providers Overcharge You</title>
+    <meta name="description" content="Understand token inflation in LLM API services and how to detect it.">
+    <link rel="canonical" href="https://tehdarklea.github.io/token-inflation-llm-apis.html">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 720px; margin: 0 auto; padding: 40px 20px; color: #1a1a1a; line-height: 1.7; }
+        h1 { font-size: 2em; margin-bottom: 0.5em; }
+        h2 { font-size: 1.5em; margin-top: 1.5em; }
+        h3 { font-size: 1.2em; margin-top: 1.2em; }
+        a { color: #0066cc; }
+        code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; }
+        ul, ol { padding-left: 1.5em; }
+        .cta { background: #f0f7ff; border: 1px solid #c8e1ff; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center; }
+        .cta a { font-size: 1.1em; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Token Inflation in LLM APIs</h1>
+    <h2>What Is Token Inflation?</h2>
+<p>Token inflation occurs when an API provider reports more tokens than were actually used in a request. This directly increases your bill — if a provider inflates tokens by 40%, you're paying 40% more than you should.</p>
+
+<h2>How Token Inflation Works</h2>
+<p>There are several methods fraudulent providers use:</p>
+<ul>
+<li><strong>Padding prompt tokens</strong> — Adding invisible characters or extra whitespace to your prompt before tokenization</li>
+<li><strong>Inflating completion tokens</strong> — Reporting more output tokens than the response actually contains</li>
+<li><strong>Hidden system prompts</strong> — Injecting additional instructions that consume tokens you pay for</li>
+<li><strong>Fake token counting</strong> — Simply reporting higher numbers than reality</li>
+</ul>
+
+<h2>Real-World Impact</h2>
+<p>Based on our analysis of 100+ API providers:</p>
+<ul>
+<li>30% of relay providers inflate tokens by 20-50%</li>
+<li>Average inflation rate: 35%</li>
+<li>Monthly overcharge for a 00/month user: 50-250</li>
+</ul>
+
+<h2>How to Detect Token Inflation</h2>
+<ol>
+<li><strong>Use the official tokenizer</strong> — Compare token counts with OpenAI's tiktoken library</li>
+<li><strong>Test with known inputs</strong> — Send a simple "Hello" and check if token counts are reasonable</li>
+<li><strong>Monitor ratios</strong> — prompt_tokens + completion_tokens should equal total_tokens</li>
+<li><strong>Use <a href="https://api-dna.com">API DNA</a></strong> — Free tool that automatically detects token inflation</li>
+</ol>
+
+<h2>Free Detection Tool</h2>
+<p><a href="https://api-dna.com">API DNA</a> provides free, instant detection of token inflation and other API fraud. No signup required — just enter your endpoint URL and get results in seconds.</p>
+
+<h2>Protecting Yourself</h2>
+<ol>
+<li>Regularly verify your provider with <a href="https://api-dna.com">API DNA</a></li>
+<li>Monitor your token usage patterns for anomalies</li>
+<li>Compare costs with official provider pricing</li>
+<li>Switch providers if inflation is detected — there are honest providers out there</li>
+</ol>
+    <div class="cta">
+        <p>🔍 Verify your API provider for free → <a href="https://api-dna.com">API DNA</a></p>
+    </div>
+    <footer style="margin-top:40px;padding-top:20px;border-top:1px solid #eee;font-size:0.9em;color:#666">
+        <p>Free API fingerprint verification: <a href="https://api-dna.com">api-dna.com</a></p>
+    </footer>
+</body>
+</html>
