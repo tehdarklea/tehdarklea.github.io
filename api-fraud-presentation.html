@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Fraud Detection — How to Protect Your LLM API Investment</title>
+    <meta name="description" content="Presentation: How to detect fake LLM API providers, token inflation, and relay chains. Free tool: api-dna.com">
+    <link rel="canonical" href="https://tehdarklea.github.io/api-fraud-presentation.html">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 40px 20px; background: #f8f9fa; }
+        .slide { max-width: 800px; margin: 0 auto 40px; background: white; border-radius: 12px; padding: 60px 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        h1 { font-size: 2.5em; color: #1a1a2e; margin-bottom: 0.3em; }
+        h2 { font-size: 1.8em; color: #16213e; margin-top: 0; }
+        h3 { font-size: 1.3em; color: #0f3460; }
+        p { font-size: 1.1em; line-height: 1.7; color: #333; }
+        ul { font-size: 1.1em; line-height: 1.8; }
+        .highlight { background: #e8f4fd; padding: 15px 25px; border-radius: 8px; border-left: 4px solid #0066cc; margin: 20px 0; }
+        .cta { background: #1a1a2e; color: white; padding: 25px; border-radius: 8px; text-align: center; margin: 20px 0; }
+        .cta a { color: #4cc9f0; font-size: 1.3em; font-weight: bold; }
+        .stat { display: inline-block; text-align: center; margin: 0 20px; }
+        .stat-number { font-size: 2em; font-weight: bold; color: #e63946; }
+        .slide-number { color: #999; font-size: 0.9em; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+<div class="slide">
+    <h1>🔍 API Fraud Detection</h1>
+    <h2>How to Protect Your LLM API Investment</h2>
+    <p>Free verification tool: <a href="https://api-dna.com">api-dna.com</a></p>
+    <p class="slide-number">Slide 1 of 8</p>
+</div>
+
+<div class="slide">
+    <h2>The Problem</h2>
+    <p>API relay providers are defrauding users through three main methods:</p>
+    <div class="stat">
+        <div class="stat-number">30%</div>
+        <p>of relay providers<br>inflate tokens</p>
+    </div>
+    <div class="stat">
+        <div class="stat-number">50%</div>
+        <p>max token<br>overcharge rate</p>
+    </div>
+    <div class="stat">
+        <div class="stat-number">80+</div>
+        <p>LLM models<br>affected</p>
+    </div>
+    <p class="slide-number">Slide 2 of 8</p>
+</div>
+
+<div class="slide">
+    <h2>Fraud Type 1: Model Substitution</h2>
+    <div class="highlight">
+        <p><strong>You pay for GPT-4, you get GPT-3.5</strong></p>
+    </div>
+    <ul>
+        <li>Provider advertises premium model access</li>
+        <li>Behind the scenes, requests are routed to cheaper models</li>
+        <li>Response quality is noticeably worse for complex tasks</li>
+        <li>Hard to detect without automated fingerprinting</li>
+    </ul>
+    <p class="slide-number">Slide 3 of 8</p>
+</div>
+
+<div class="slide">
+    <h2>Fraud Type 2: Token Inflation</h2>
+    <div class="highlight">
+        <p><strong>Providers report 30-50% more tokens than actually used</strong></p>
+    </div>
+    <ul>
+        <li>Padding prompt tokens with invisible characters</li>
+        <li>Inflating completion token counts</li>
+        <li>Hidden system prompts consuming your budget</li>
+        <li>Monthly overcharge: $150-250 on a $500/month account</li>
+    </ul>
+    <p class="slide-number">Slide 4 of 8</p>
+</div>
+
+<div class="slide">
+    <h2>Fraud Type 3: Hidden Relay Chains</h2>
+    <div class="highlight">
+        <p><strong>Requests pass through 3-4 proxy layers</strong></p>
+    </div>
+    <ul>
+        <li>Each layer adds 100-500ms latency</li>
+        <li>Proxies may modify responses or collect data</li>
+        <li>X-Forwarded-For and Via headers reveal the chain</li>
+        <li>Reduces reliability and increases failure points</li>
+    </ul>
+    <p class="slide-number">Slide 5 of 8</p>
+</div>
+
+<div class="slide">
+    <h2>The Solution: API DNA</h2>
+    <div class="cta">
+        <p><a href="https://api-dna.com">api-dna.com</a></p>
+        <p>Free, instant API fingerprint verification</p>
+    </div>
+    <ul>
+        <li>✅ No signup required</li>
+        <li>✅ 80+ models supported</li>
+        <li>✅ Integrity score (A-F) in seconds</li>
+        <li>✅ Detects model substitution, token inflation & relay chains</li>
+    </ul>
+    <p class="slide-number">Slide 6 of 8</p>
+</div>
+
+<div class="slide">
+    <h2>How It Works</h2>
+    <ol>
+        <li>Visit <a href="https://api-dna.com">api-dna.com</a></li>
+        <li>Enter your API endpoint URL</li>
+        <li>API DNA sends verification probes</li>
+        <li>Get instant integrity analysis</li>
+    </ol>
+    <p>Also available as:</p>
+    <ul>
+        <li><a href="https://github.com/tehdarklea/api-dna">CLI tool</a> — <code>npx api-dna-checker</code></li>
+        <li><a href="https://github.com/tehdarklea/api-dna-chrome-extension">Chrome extension</a> — Real-time monitoring</li>
+    </ul>
+    <p class="slide-number">Slide 7 of 8</p>
+</div>
+
+<div class="slide">
+    <h2>Take Action</h2>
+    <div class="cta">
+        <p>🔍 Verify your API provider now</p>
+        <p><a href="https://api-dna.com">api-dna.com</a></p>
+    </div>
+    <p>Don't let fraudulent providers drain your budget.</p>
+    <p>Free verification takes less than 30 seconds.</p>
+    <p class="slide-number">Slide 8 of 8</p>
+</div>
+
+<footer style="max-width:800px;margin:0 auto;padding:20px;text-align:center;color:#666;font-size:0.9em">
+    <p>Free API fingerprint verification: <a href="https://api-dna.com">api-dna.com</a> | 
+    <a href="https://github.com/tehdarklea/api-dna">GitHub</a> | 
+    <a href="https://github.com/tehdarklea/api-dna-chrome-extension">Chrome Extension</a></p>
+</footer>
+
+</body>
+</html>
