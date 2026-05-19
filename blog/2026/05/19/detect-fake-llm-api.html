@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Detect Fake LLM API Providers Before They Drain Your Budget</title>
+    <meta name="description" content="Don't let resellers sell you GPT-4 while serving GPT-3.5. Four detection methods and a free tool that automates them all.">
+    <meta name="keywords" content="detect fake LLM API, API verification, model substitution, token inflation, API-DNA, fake API detection">
+    <link rel="canonical" href="https://tehdarklea.github.io/blog/2026/05/19/detect-fake-llm-api.html">
+    <meta property="og:title" content="How to Detect Fake LLM API Providers Before They Drain Your Budget">
+    <meta property="og:description" content="Don't let resellers sell you GPT-4 while serving GPT-3.5. Four detection methods and a free tool that automates them all.">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How to Detect Fake LLM API Providers Before They Drain Your Budget">
+    <meta name="twitter:description" content="Don't let resellers sell you GPT-4 while serving GPT-3.5. Four detection methods and a free tool that automates them all.">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "How to Detect Fake LLM API Providers Before They Drain Your Budget",
+        "datePublished": "2026-05-19",
+        "author": { "@type": "Person", "name": "tehdarklea" },
+        "description": "Don't let resellers sell you GPT-4 while serving GPT-3.5. Four detection methods and a free tool that automates them all.",
+        "mainEntityOfPage": "https://tehdarklea.github.io/blog/2026/05/19/detect-fake-llm-api.html"
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.8; }
+        .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .back { display: inline-block; margin-bottom: 2rem; color: #64748b; text-decoration: none; font-size: 0.9rem; }
+        .back:hover { color: #94a3b8; }
+        h1 { font-size: 2rem; margin-bottom: 1rem; line-height: 1.3; }
+        .subtitle { color: #94a3b8; font-size: 1.1rem; margin-bottom: 2rem; font-style: italic; border-left: 3px solid #4f46e5; padding-left: 1rem; }
+        h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; color: #818cf8; }
+        h3 { font-size: 1.2rem; margin: 2rem 0 0.75rem; color: #a5b4fc; }
+        p { margin-bottom: 1rem; color: #cbd5e1; }
+        strong { color: #e2e8f0; }
+        a { color: #818cf8; text-decoration: none; }
+        a:hover { color: #a5b4fc; text-decoration: underline; }
+        code { background: #1e293b; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.9rem; color: #a5b4fc; }
+        pre { background: #1e293b; padding: 1.25rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0 1.5rem; }
+        pre code { background: none; padding: 0; font-size: 0.85rem; color: #e2e8f0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; }
+        th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid #334155; }
+        th { color: #818cf8; font-weight: 600; }
+        td { color: #cbd5e1; }
+        .cta-box { background: #1e293b; border: 1px solid #4f46e5; border-radius: 12px; padding: 1.5rem; margin: 2rem 0; text-align: center; }
+        .cta-box a { display: inline-block; padding: 0.75rem 1.5rem; background: #4f46e5; color: white; border-radius: 8px; text-decoration: none; font-weight: 600; }
+        .cta-box a:hover { background: #4338ca; }
+        hr { border: none; border-top: 1px solid #334155; margin: 2rem 0; }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; color: #cbd5e1; }
+        li { margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/blog/" class="back">← All Posts</a>
+        <h1>How to Detect Fake LLM API Providers Before They Drain Your Budget</h1>
+        <p class="subtitle">Don't let resellers sell you GPT-4 while serving GPT-3.5. Here's how to catch them — and a free tool that does it automatically.</p>
+        <hr>
+
+        <h2>The $2.3B Problem No One Talks About</h2>
+        <p>The LLM API reselling market is booming. Third-party providers offer "discounted" access to GPT-4, Claude, Gemini, and other frontier models through their own endpoints. Sounds great — until you realize what's actually happening behind the curtain.</p>
+        <p><strong>Model substitution</strong> is the most common fraud: you pay for GPT-4, but the provider silently routes your request to GPT-3.5-turbo or an even cheaper model. The price difference? GPT-4 costs ~$30/1M output tokens vs GPT-3.5-turbo at ~$0.50/1M. That's a 60x margin for the reseller — and you're none the wiser.</p>
+        <p>But model swapping is just the beginning. Here are the four ways API resellers silently steal from you:</p>
+
+        <h3>1. Model Substitution</h3>
+        <p>You request <code>gpt-4</code>, they serve <code>gpt-3.5-turbo</code>. The response looks plausible, but it's cheaper, less capable, and not what you paid for. Some providers even fine-tune smaller models to mimic larger ones' output style.</p>
+
+        <h3>2. Token Inflation</h3>
+        <p>Your prompt is 500 tokens. The provider reports 800 input tokens and 1,200 output tokens. They inflate both sides of the ledger, charging you for tokens that were never processed.</p>
+
+        <h3>3. Speed Throttling</h3>
+        <p>They advertise "GPT-4 at half price" — because they're rate-limiting your requests to a fraction of what the real API provides. You save money per token but lose it in throughput and latency.</p>
+
+        <h3>4. The Relay Chain</h3>
+        <p>Your request doesn't go directly to OpenAI. It bounces through Provider A → Provider B → Provider C → OpenAI. Each hop adds latency, reduces reliability, and gives every intermediary a chance to peek at your data.</p>
+
+        <hr>
+
+        <h2>4 Methods to Detect Fake LLM APIs</h2>
+
+        <h3>Method 1: Header Analysis</h3>
+        <p>Real API providers return specific headers. OpenAI includes <code>openai-organization</code>, <code>x-ratelimit-remaining-tokens</code>, and other identifying fields. If you're supposedly hitting OpenAI's API through a reseller but see none of these headers — or worse, see headers from a completely different provider — something's wrong.</p>
+<pre><code>import requests
+
+response = requests.post(
+    "https://your-reseller.com/v1/chat/completions",
+    headers={"Authorization": "Bearer sk-xxx"},
+    json={"model": "gpt-4", "messages": [{"role": "user", "content": "test"}]}
+)
+
+# Check for direct API headers
+suspicious = not any(
+    h.startswith("x-ratelimit") or h.startswith("openai")
+    for h in response.headers
+)</code></pre>
+
+        <h3>Method 2: Token Count Verification</h3>
+        <p>Compare the reported token usage against your own count. Use a tokenizer (tiktoken for OpenAI models) to count tokens locally, then check if the API's <code>usage</code> field matches.</p>
+<pre><code>import tiktoken
+
+encoding = tiktoken.encoding_for_model("gpt-4")
+actual_tokens = len(encoding.encode(your_prompt + your_response))
+reported_tokens = response["usage"]["total_tokens"]
+
+discrepancy = abs(actual_tokens - reported_tokens) / actual_tokens
+if discrepancy > 0.1:  # More than 10% off
+    print("⚠️ Token count mismatch detected!")</code></pre>
+
+        <h3>Method 3: Latency Analysis</h3>
+        <p>GPT-4 has a characteristic response time profile. If your "GPT-4" endpoint responds as fast as GPT-3.5-turbo — consistently — that's suspicious. Frontier models are slower. Way slower.</p>
+        <p>Benchmark against the official API and compare:</p>
+        <ul>
+            <li><strong>GPT-4</strong>: ~15-30 tokens/second</li>
+            <li><strong>GPT-3.5-turbo</strong>: ~80-120 tokens/second</li>
+            <li><strong>GPT-4o</strong>: ~60-100 tokens/second</li>
+        </ul>
+        <p>If your "GPT-4" is cranking out 100+ tokens/second, you're probably getting GPT-3.5.</p>
+
+        <h3>Method 4: Behavioral Testing</h3>
+        <p>Different models have different capabilities. Design tests that only a specific model can pass:</p>
+<pre><code># GPT-4 can handle this; GPT-3.5 typically can't
+test_prompt = """
+A bat and ball cost $1.10 in total.
+The bat costs $1.00 more than the ball.
+How much does the ball cost?
+Think step by step.
+"""
+
+# GPT-4: $0.05 (correct)
+# GPT-3.5: $0.10 (wrong, most of the time)</code></pre>
+
+        <hr>
+
+        <h2>Introducing API-DNA: Automated API Fingerprinting</h2>
+        <p>Running these checks manually is tedious. That's why I built <a href="https://api-dna.com">API-DNA</a> — a free tool that automates all four detection methods and gives you a trust score in seconds.</p>
+        <p>Here's how it works:</p>
+        <ol>
+            <li><strong>Enter your API endpoint</strong> — any OpenAI-compatible endpoint</li>
+            <li><strong>API-DNA runs a battery of tests</strong> — header analysis, token verification, latency profiling, and behavioral challenges</li>
+            <li><strong>Get a Trust Level</strong> — from L0 (complete fraud) to L7 (verified direct provider)</li>
+        </ol>
+
+        <h3>Trust Levels Explained</h3>
+        <table>
+            <tr><th>Level</th><th>Meaning</th><th>What It Means For You</th></tr>
+            <tr><td><strong>L0</strong></td><td>Complete Fraud</td><td>Not even serving LLM responses; likely returning cached or random text</td></tr>
+            <tr><td><strong>L1</strong></td><td>Model Substitution Detected</td><td>Claiming one model, serving another</td></tr>
+            <tr><td><strong>L2</strong></td><td>Token Inflation</td><td>Charging for more tokens than actually processed</td></tr>
+            <tr><td><strong>L3</strong></td><td>Relay Chain Detected</td><td>Your data passes through multiple intermediaries</td></tr>
+            <tr><td><strong>L4</strong></td><td>Partial Match</td><td>Some checks pass, others fail; proceed with caution</td></tr>
+            <tr><td><strong>L5</strong></td><td>Mostly Verified</td><td>Core checks pass, minor discrepancies</td></tr>
+            <tr><td><strong>L6</strong></td><td>Verified Reseller</td><td>Legitimate reseller with transparent model routing</td></tr>
+            <tr><td><strong>L7</strong></td><td>Direct Provider</td><td>Verified direct connection to the model provider</td></tr>
+        </table>
+
+        <div class="cta-box">
+            <p>Test your API endpoint for free — no signup required</p>
+            <a href="https://api-dna.com">Start Free Scan →</a>
+        </div>
+
+        <h2>The Bigger Picture</h2>
+        <p>The API reselling market isn't going away. It serves a legitimate purpose: making frontier models accessible in regions where direct API access is restricted, or for companies that need unified billing across multiple providers.</p>
+        <p>But the lack of transparency is poisoning the market. When buyers can't verify what they're getting, trust erodes. When trust erodes, the legitimate resellers suffer alongside the frauds.</p>
+        <p><strong>API-DNA exists to bring transparency.</strong> A free, open verification layer that any developer can use to check any provider. No signup required. No vendor lock-in. Just truth.</p>
+
+        <div class="cta-box">
+            <p>Visit <strong>api-dna.com</strong> and test your API endpoint. It takes 30 seconds and could save you thousands.</p>
+            <a href="https://api-dna.com">Try API-DNA Free →</a>
+        </div>
+
+        <hr>
+        <p style="color: #64748b; font-size: 0.85rem;"><em>API-DNA is free to use. No account required. Test any OpenAI-compatible endpoint at <a href="https://api-dna.com">api-dna.com</a>.</em></p>
+    </div>
+</body>
+</html>

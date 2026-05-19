@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Built an API Fingerprint Engine and a P2P Token Marketplace — Here's Why</title>
+    <meta name="description" content="How getting scammed out of $4,200 led me to build two products that fix the same problem from opposite ends — API-DNA and TokenC2C.">
+    <meta name="keywords" content="API token marketplace, P2P token trading, API fingerprint, API-DNA, TokenC2C, API verification">
+    <link rel="canonical" href="https://tehdarklea.github.io/blog/2026/05/19/api-fingerprint-p2p-token-marketplace.html">
+    <meta property="og:title" content="I Built an API Fingerprint Engine and a P2P Token Marketplace — Here's Why">
+    <meta property="og:description" content="How getting scammed out of $4,200 led me to build API-DNA and TokenC2C.">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "I Built an API Fingerprint Engine and a P2P Token Marketplace — Here's Why",
+        "datePublished": "2026-05-19",
+        "author": { "@type": "Person", "name": "tehdarklea" },
+        "description": "How getting scammed out of $4,200 led me to build two products that fix the same problem from opposite ends.",
+        "mainEntityOfPage": "https://tehdarklea.github.io/blog/2026/05/19/api-fingerprint-p2p-token-marketplace.html"
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.8; }
+        .container { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .back { display: inline-block; margin-bottom: 2rem; color: #64748b; text-decoration: none; font-size: 0.9rem; }
+        .back:hover { color: #94a3b8; }
+        h1 { font-size: 2rem; margin-bottom: 1rem; line-height: 1.3; }
+        .subtitle { color: #94a3b8; font-size: 1.1rem; margin-bottom: 2rem; font-style: italic; border-left: 3px solid #4f46e5; padding-left: 1rem; }
+        h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; color: #818cf8; }
+        h3 { font-size: 1.2rem; margin: 2rem 0 0.75rem; color: #a5b4fc; }
+        p { margin-bottom: 1rem; color: #cbd5e1; }
+        strong { color: #e2e8f0; }
+        a { color: #818cf8; text-decoration: none; }
+        a:hover { color: #a5b4fc; text-decoration: underline; }
+        code { background: #1e293b; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.9rem; color: #a5b4fc; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; }
+        th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid #334155; }
+        th { color: #818cf8; font-weight: 600; }
+        td { color: #cbd5e1; }
+        .cta-box { background: #1e293b; border: 1px solid #4f46e5; border-radius: 12px; padding: 1.5rem; margin: 2rem 0; text-align: center; }
+        .cta-box a { display: inline-block; padding: 0.75rem 1.5rem; background: #4f46e5; color: white; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.25rem; }
+        .cta-box a:hover { background: #4338ca; }
+        hr { border: none; border-top: 1px solid #334155; margin: 2rem 0; }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; color: #cbd5e1; }
+        li { margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/blog/" class="back">← All Posts</a>
+        <h1>I Built an API Fingerprint Engine and a P2P Token Marketplace — Here's Why</h1>
+        <p class="subtitle">How getting scammed out of $4,200 led me to build two products that fix the same problem from opposite ends.</p>
+        <hr>
+
+        <h2>The $4,200 Lesson</h2>
+        <p>Six months ago, I was running a production AI pipeline that consumed about 2M tokens/day through a "premium" API reseller. They advertised GPT-4 access at 40% below OpenAI's list price. The responses looked fine. The latency was acceptable. The bills were lower.</p>
+        <p>Then I ran a benchmark.</p>
+        <p>My "GPT-4" endpoint was serving GPT-3.5-turbo on 70% of requests. The remaining 30% were split between GPT-4 and some model I couldn't identify. The token counts were inflated by 15-25%. And my data? It was bouncing through three different servers before reaching OpenAI — each one with full access to my prompts and responses.</p>
+        <p>I did the math: I'd overpaid by approximately $4,200 over three months. And I was one of the lucky ones — I caught it early.</p>
+        <p>That night, I started building.</p>
+
+        <hr>
+
+        <h2>Product #1: API-DNA — The Verification Layer</h2>
+        <p>The first problem was obvious: <strong>there was no way to verify what an API provider was actually serving.</strong> You send a request, you get a response, and you just... trust that the provider told the truth about what model processed it.</p>
+        <p><a href="https://api-dna.com">API-DNA</a> changes that. It's a free automated fingerprinting engine that tests any OpenAI-compatible endpoint across four dimensions:</p>
+
+        <h3>Header Fingerprinting</h3>
+        <p>Every API provider leaves traces in HTTP headers. OpenAI includes specific rate-limit headers, organization IDs, and request IDs. If those are missing — or replaced with headers from a different provider — your request isn't going where you think it's going.</p>
+
+        <h3>Token Count Verification</h3>
+        <p>API-DNA independently counts the tokens in your request and response using the appropriate tokenizer, then compares against what the API reports. Inflation rates of 10-40% are common among fraudulent providers.</p>
+
+        <h3>Latency Profiling</h3>
+        <p>Different models have different speed characteristics. GPT-4 outputs ~15-30 tokens/second. GPT-3.5-turbo outputs ~80-120 tokens/second. API-DNA builds a latency profile and compares it against known baselines.</p>
+
+        <h3>Behavioral Testing</h3>
+        <p>Each model has unique capabilities and failure modes. API-DNA sends a battery of challenge prompts designed to differentiate models — logical reasoning tests, multi-step math, and style-specific generation tasks.</p>
+
+        <h3>Trust Levels (L0-L7)</h3>
+        <ul>
+            <li><strong>L0-L2</strong>: Don't use. Complete fraud or model substitution detected.</li>
+            <li><strong>L3-L4</strong>: Proceed with caution. Relay chains or partial discrepancies found.</li>
+            <li><strong>L5-L7</strong>: Verified. The provider is serving what they claim.</li>
+        </ul>
+        <p><strong>API-DNA is free.</strong> No signup. No credit card. Just enter your endpoint URL and get a result in 30 seconds.</p>
+        <p>→ <a href="https://api-dna.com">Try it at api-dna.com</a></p>
+
+        <hr>
+
+        <h2>Product #2: TokenC2C — The Marketplace</h2>
+        <p>API-DNA solves the verification problem. But it exposed a deeper issue: <strong>even when you find a legitimate provider, the pricing is opaque and the market is fragmented.</strong></p>
+        <p><a href="https://tokenc2c.xyz">TokenC2C</a> is a peer-to-peer marketplace that connects token holders directly with token buyers. Think of it as a decentralized exchange for API compute.</p>
+
+        <h3>How It Works</h3>
+        <ol>
+            <li><strong>Sellers</strong> list their available API capacity — model, region, price per token, and their API-DNA Trust Level</li>
+            <li><strong>Buyers</strong> browse listings, compare prices, and verify sellers' Trust Levels independently via API-DNA</li>
+            <li><strong>Smart contracts</strong> handle the transaction — escrow, delivery verification, and settlement</li>
+            <li><strong>API-DNA verification</strong> runs automatically post-transaction to confirm the buyer received what they paid for</li>
+        </ol>
+
+        <h3>Why P2P Beats Traditional Reselling</h3>
+        <table>
+            <tr><th>Traditional Reselling</th><th>TokenC2C</th></tr>
+            <tr><td>3-5 intermediaries</td><td>Direct buyer-seller</td></tr>
+            <tr><td>Opaque pricing</td><td>Transparent, market-driven</td></tr>
+            <tr><td>No verification</td><td>API-DNA Trust Level required</td></tr>
+            <tr><td>Manual dispute resolution</td><td>Automated escrow & verification</td></tr>
+            <tr><td>40-200% markup</td><td>Near-cost pricing</td></tr>
+        </table>
+
+        <h3>The Verification-Marketplace Loop</h3>
+        <p>This is why I built both products. They form a closed loop:</p>
+        <ol>
+            <li><strong>API-DNA</strong> verifies providers → creates trust signals</li>
+            <li><strong>TokenC2C</strong> uses those trust signals → enables safe P2P transactions</li>
+            <li><strong>Transactions generate data</strong> → improves API-DNA's detection models</li>
+            <li><strong>Better detection</strong> → more trust in the marketplace → more liquidity</li>
+        </ol>
+        <p>Each product makes the other stronger. Verification without a market is academic. A market without verification is dangerous. Together, they create a trustworthy ecosystem.</p>
+
+        <hr>
+
+        <h2>The Road Ahead</h2>
+        <p>Both products are live and functional:</p>
+        <ul>
+            <li><a href="https://api-dna.com">API-DNA</a> — Free API fingerprinting, available now</li>
+            <li><a href="https://tokenc2c.xyz">TokenC2C</a> — P2P token marketplace, early access open</li>
+        </ul>
+        <p>The next milestones:</p>
+        <ol>
+            <li><strong>API-DNA API</strong> — Programmatic access for CI/CD pipelines and automated monitoring</li>
+            <li><strong>TokenC2C smart escrow</strong> — On-chain settlement for larger transactions</li>
+            <li><strong>Provider certification program</strong> — L7-rated providers get a verifiable badge</li>
+            <li><strong>Community benchmarks</strong> — Open dataset of provider performance over time</li>
+        </ol>
+
+        <div class="cta-box">
+            <p>Try them both:</p>
+            <a href="https://api-dna.com">🔍 API-DNA — Verify your API</a>
+            <a href="https://tokenc2c.xyz">💱 TokenC2C — Trade tokens P2P</a>
+        </div>
+
+        <hr>
+        <p style="color: #64748b; font-size: 0.85rem;"><em>Built by a developer who got scammed, for developers who shouldn't have to.</em></p>
+    </div>
+</body>
+</html>
